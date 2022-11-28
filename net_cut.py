@@ -36,10 +36,13 @@ sudo iptables --flush
 
 
 from netfilterqueue import NetfilterQueue
+import scapy.all as scapy
 
+from packet_sniffer import print_packet_info
 
 def process_packet(packet):
-    print( packet )
+    scapy_packet = scapy.IP( packet.get_payload() )
+    print( scapy_packet.show()  )
 
     # accept packet
     packet.accept()
